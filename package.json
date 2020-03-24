@@ -4,8 +4,9 @@
   "description": "webpack learning",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "watch": "npm run build -- --watch"
+    "dev": "webpack --mode=development",
+    "prod": "webpack --mode=production",
+    "watch": "npm run dev -- --watch"
   },
   "repository": {
     "type": "git",
