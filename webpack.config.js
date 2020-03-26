@@ -38,12 +38,17 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        loader: 'file-loader',
-        options: {
-          name: '[name].[ext]',
-          publicPath: './src/img',
-          outputPath: './img'
-        }
+        loaders: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              publicPath: './src/img',
+              outputPath: './img'
+            }
+          },
+          'image-webpack-loader'
+        ]
       }
     ]
   },
