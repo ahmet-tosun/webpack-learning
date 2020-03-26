@@ -51,6 +51,14 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].css'
     }),
-    new CleanWebpackPlugin()
+    new CleanWebpackPlugin(),
+    function () {
+      this.plugin('done', stats => {
+        require('fs').writeFileSync(
+          path.join(__dirname, 'dist/manifest.json'),
+          JSON.stringify(stats.toJson().assetsByChunkName)
+        );
+      });
+    }
   ]
 };
