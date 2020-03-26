@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const BuildManifestPlugin = require('./build/plugins/BuildManifestPlugin');
 
 module.exports = {
   entry: {
@@ -57,13 +58,6 @@ module.exports = {
       filename: '[name].css'
     }),
     new CleanWebpackPlugin(),
-    function () {
-      this.plugin('done', stats => {
-        require('fs').writeFileSync(
-          path.join(__dirname, 'dist/manifest.json'),
-          JSON.stringify(stats.toJson().assetsByChunkName)
-        );
-      });
-    }
+    new BuildManifestPlugin()
   ]
 };
