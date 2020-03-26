@@ -1,13 +1,16 @@
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    main: './src/index.js',
+    vendor: ['jquery']
+  },
   output: {
     path: path.resolve(__dirname, './dist'),
-    filename: 'bundle.js'
+    filename: '[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -45,6 +48,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({ filename: '[name].css' })
+    new MiniCssExtractPlugin({
+      filename: '[name].css'
+    }),
+    new CleanWebpackPlugin()
   ]
 };
